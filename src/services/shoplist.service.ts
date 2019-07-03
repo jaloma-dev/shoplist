@@ -25,8 +25,19 @@ export class ShoplistService {
         const index = this.findIndexProduct(product);
         
         if(index > -1) {
-            this.shoplist.value[index].quantity--;
+            if(this.shoplist.value[index].quantity === 1) {
+                this.shoplist.value.splice(index, 1);
+            } else {
+                this.shoplist.value[index].quantity--;
+            }
         }
+   }
+
+   removeItem(product: Product) :void
+   {
+       const index = this.findIndexProduct(product);
+
+       if(index > -1) this.shoplist.value.splice(index, 1);
    }
 
    findIndexProduct(product: Product): number

@@ -8,5 +8,34 @@
 </ion-header>
 
 <ion-content>
+<ion-list>
+    <div *ngFor="let category of categories; let i = index;">
+        <ion-list-header>
+            {{category.name}}
+            <ion-icon [name]="displayIcon(i)" (click)="toggleDisplay($event, i)"></ion-icon>
+        </ion-list-header>
 
+        <div *ngIf="isHidden[i]">
+        <div *ngFor="let item of shoplist">
+            <ion-item *ngIf="item.product.category.name === category.name">
+                <ion-grid>
+                    <ion-row justify-content-between align-items-center>
+                        <ion-col col>
+                            {{item.product.name}}
+                            <ion-badge color="tertiary">{{item.quantity}}</ion-badge>
+                        </ion-col>
+                        <ion-col col>
+                            <ion-chip color="success" outline="true" (click)="removeItem(item.product)">
+                                <ion-label>Check?</ion-label>
+                                <ion-icon name="checkmark-circle-outline"></ion-icon>
+                            </ion-chip>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+        </div>
+        </div>
+    </div>
+
+  </ion-list>
 </ion-content>
