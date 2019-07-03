@@ -8,6 +8,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ProductService } from 'src/services/product.service';
+import { CategoryService } from 'src/services/category.service';
+import { ShoplistService } from 'src/services/shoplist.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +19,9 @@ import { AppComponent } from './app.component';
   providers: [
     StatusBar,
     SplashScreen,
+    ProductService,
+    CategoryService,
+    ShoplistService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -9,40 +9,32 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header>
-      Meat
-    </ion-list-header>
-    <ion-item>
-      <ion-grid>
-        <ion-row justify-content-between align-items-center>
-            <ion-col col>Beef</ion-col>
-            <ion-col col style="right:0;">
-                <ion-button >
-                    <ion-icon slot="icon-only" name="add-circle"></ion-icon>
-                </ion-button>
-                <ion-button color="danger">
-                    <ion-icon slot="icon-only" name="remove-circle"></ion-icon>
-                </ion-button>
-            </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
+    <div *ngFor="let category of categories; let i = index;">
+        <ion-list-header>
+            {{category.name}}
+            <ion-icon [name]="displayIcon(i)" (click)="toggleDisplay($event, i)"></ion-icon>
+        </ion-list-header>
 
-     <ion-item>
-      <ion-grid>
-        <ion-row justify-content-between align-items-center>
-            <ion-col col>Steack</ion-col>
-            <ion-col col>
-                <ion-button >
-                    <ion-icon slot="icon-only" name="add-circle"></ion-icon>
-                </ion-button>
-                <ion-button color="danger">
-                    <ion-icon slot="icon-only" name="remove-circle"></ion-icon>
-                </ion-button>
-            </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
+        <div *ngIf="isHidden[i]">
+        <div *ngFor="let product of products">
+            <ion-item *ngIf="product.category.name === category.name">
+                <ion-grid>
+                    <ion-row justify-content-between align-items-center>
+                        <ion-col col>{{product.name}}</ion-col>
+                        <ion-col col style="right:0;">
+                            <ion-button (click)="addProduct(product)">
+                                <ion-icon slot="icon-only" name="add-circle" ></ion-icon>
+                            </ion-button>
+                            <ion-button color="danger" (click)="removeProduct(product)">
+                                <ion-icon slot="icon-only" name="remove-circle" ></ion-icon>
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-item>
+        </div>
+        </div>
+    </div>
 
   </ion-list>
 </ion-content>
